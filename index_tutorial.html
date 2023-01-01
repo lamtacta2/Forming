@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title> Demo </title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        font-size: 10px;
+        font-weight: 100;
+      }
+
+      main{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        /* background-image: url("./bga.jpg"); */
+      }
+
+      main1{
+        width: 50%;
+        height: 100%;
+      }
+
+      main2{
+        width: 50%;
+        height: 100%;
+        justify-content: center;
+      align-items: center;
+      text-align: center;
+      }
+
+      main8{
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      }
+
+    section h1 {
+      font-size: 30px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    section h2 {
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+
+    section i{
+      font-size: 15px;
+    }
+
+    section h6 {
+      font-size: 15px;
+      text-transform: none;
+    }
+
+    section h3 {
+      font-size: 25px;
+      text-transform: uppercase;
+    }
+
+    section b{
+        font-size: 20px;
+    }
+
+    section h4 {
+      font-size: 15px;
+      text-align: left;
+      padding-left: 10%;
+    }
+
+
+    logo{
+      width: 100%;
+      height: 100%;
+      display: flex;
+    }
+
+    img{
+      width: 10%;
+      height: 10%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 10px;
+    }
+
+</style>
+  </head>
+
+  <body>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <logo>
+      <img src="logotdm.png" style="margin-left: 5%; height: 65px;"/>
+    <main8 style="margin-top: 10px; ">
+      <section>
+        <h1>EDPOMP - Virtual Lab</h1>
+        <h2>ADDITIVE MANUFACTURING DIRECTED ENERGY DEPOSITION (DED)</h2>
+      </section>
+    </main8>
+      <img src="logovin_v1.png" style="margin-left: 5%; height: 65px;"/>
+    </logo>
+
+    <main >
+        <main1>
+            <section> 
+                <br><br>  
+                <h1 style="padding-left: 10%; justify-content: center; align-items: center; text-align: center;">THIS IS A TUTORIAL TO USE THIS SOFTWARE</h1>  
+                    <br><br>
+                    <h4><b>Step 1:  </b>   Set parameters.</h4>
+                    <br>
+                    <h4><b>Step 2:  </b>   Set the print sample size.</h4>
+                    <br>
+                    <h4><b>Step 3:  </b> Select the chart to display. </h4>
+                    <br>
+                    <h4><b>Step 4:  </b> Press the run button to run the simulation. </h4>
+                    <br>
+                    <h4><b>Step 5:  </b>  Click Print to export the report. </h4>
+                    <br>     
+                    <h4><b>Step 6:  </b>  Click Reset button. </h4>
+                    <br>     
+      
+                    <br>
+                    <h4 style="margin-left: 0px;"> <b style="color: rgb(255, 4, 0); font-size: 20px;"> Note: </b> Please see the instructions before use. </h4><br>
+                    <h4 style="margin-left: 35px; color: rgb(43, 0, 255);"> Velocity = [10, 1000] mm/s. </h4><br>
+                    <h4 style="margin-left: 35px; color: rgb(43, 0, 255);"> Laser power = [0.97, 1.03] kW. </h4><br>
+                    <h4 style="margin-left: 35px; color: rgb(43, 0, 255);"> Ambient temperature = [285, 312] K. </h4><br>
+                    <h4 style="margin-left: 35px; color: rgb(43, 0, 255);"> Substrate preheating temperature = [556, 591] K. </h4> <br>
+                    <h4 style="margin-left: 35px; color: rgb(43, 0, 255);"> Length of print object = [1, 10] mm. </h4><br>
+                    <h4 style="margin-left: 35px; color: rgb(43, 0, 255);"> Width of printed object = [1, 10] mm. </h4><br>
+                    <h4 style="margin-left: 35px; color: rgb(43, 0, 255);"> Height of printed object = [1, 5] mm. </h4><br>           
+              </section>
+        </main1>
+  
+        <main2 >
+          <img src="p1.png" style=" justify-content: center; align-items: center; text-align: center; width: 90%;">
+        </main2>
+  
+    </main>
+
+  </body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<title>Report Virtual Lab</title>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+		/>
+		<link rel="stylesheet" href="custom.css" />
+		<link rel="stylesheet" href="custom2.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+        <style>
+        main{
+        display: flex;
+        }
+        
+    table, th, td {
+        border:1px solid rgb(0, 0, 0);
+        border-collapse: collapse;
+      }
+
+      main1{
+        width: 89%;
+        display: flex;
+      }
+
+      main2{
+        width: 80%;
+        max-width: 200px;
+        margin-right: 10%;
+        padding-right: 10%;
+      }
+
+      main3{
+      width: 100%;
+      height: 25vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background-image: url("./bga.jpg");
+      }
+
+      main4{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      }
+
+      main5{
+        width: 65%;
+        height: 100%;
+      }
+
+      main6{
+        width: 35%;
+        height: 100%;
+      }
+
+      main7{
+        width: 100%;
+        height: 100%;
+      }
+
+    section h1 {
+      font-size: 500%;
+      font-weight: 700;
+      text-transform: none;
+    }
+
+    section h2 {
+      font-size: 100%;
+      font-weight: 700;
+      text-transform: none;
+    }
+
+    section i{
+      font-size: 15px;
+    }
+
+    section h3 {
+      font-size: 15px;
+      text-transform: none;
+      text-align: justify;
+    }
+
+    section h4 {
+      font-size: 15px;
+      
+    }
+        </style>
+	</head>
+	<body>
+		<div class="container receipt-wrap" id="receipt-wrap">
+			<div class="row justify-content-md-center">
+				<div class="receipt-main col-xs-10 col-sm-10 col-md-20">
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="receipt-left">
+								<img
+									class="img-responsive"
+									alt="iamgurdeeposahan"
+									src="logotdm.png"
+                  style="width: 45%"
+								/>
+                <img
+									class="img-responsive"
+									alt="iamgurdeeposahan"
+									src="logovin_v1.png"
+                  style="height: 80px; width: 45%; padding-left: 20px;"
+								/>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 text-right">
+							<div class="receipt-right">
+								<h5>About</h5>
+								<p>EDPOMP - Virtual Lab<i class="fa fa-phone"></i></p>
+								<p>Virtual_Lab@gmail.com <i class="fa fa-envelope-o"></i></p>
+								<p>Thu Dau Mot University <i class="fa fa-location-arrow"></i></p>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-xs-8 col-sm-8 col-md-8 text-left">
+							<div class="receipt-right">
+								<h5>Parameter</h5>
+								<!-- <p><b>Velocity (mm/s):</b> <b1 id="v"> 100</b1></p> -->
+								<p><b>Laser power (kW) :</b> <b1 id="lie"> 30</b1></p>
+								<p><b>Ambient temperature (K):</b> <b1 id="at"> 345.98</b1></p>
+                <p><b>Substrate preheating temperature (K):</b> <b1 id="spt"> 500.33</b1></p>
+                <p><b>Time start:</b> <b1 id="Time_S"> 500.33</b1></p>
+                <p><b>Time stop:</b> <b1 id="Time_St"> 500.33</b1></p>
+							</div>
+						</div>
+						<div
+							class="col-xs-4 col-sm-4 col-md-4"
+							style="align-self: flex-end">
+							<div class="receipt-left">
+								<h1>Results</h1>
+							</div>
+						</div>
+					</div>
+					<br>
+                    <section style="margin-left: 10%; margin-top: 2%;"> <h1 style="font-size: 30px;" > 1.	Problem description</h1></section>
+                    <section style="margin-left: 5%; margin-top: 2%;"> <h3>Directed Energy Deposition (DED) is an additive manufacturing technique in which metallic powders are deposed and melted simultaneously via a focused heat source to create complex metallic. During the DED process, many complex physical phenomena occur in a short period and at a high-temperature level, generating fast heating and cooling rates and strong thermal gradients. Understanding these phenomena plays an essential role in determining the microstructures of the printed sample and its subsequent mechanical properties [1,2]. Consequently, we develop a simple GUI-based Virtual Lab to visualize the results of the DED process, such as temperature evolutions, cooling rate, and melting pool sizes. This software aims to give students and researchers the most simple, and comprehensive scientific overview of the aforementioned phenomenon. In addition, the deep learning-based surrogate model constructs the software database owing to its fast and accurate prediction instead of solely based on the finite element model [2,3,4].</h3></section>
+                  
+                    <section style="margin-left: 10%; margin-top: 2%;"> <h1 style="font-size: 30px;" > 2.	Numerical results</h1></section>
+                    <section style="margin-left: 5%; margin-top: 2%;"> <h3> This section summarizes the numerical results of the temperature evolutions, the cooling rates, and the melting pool sizes. We report the numerical results at five clad points (P1, P2, …, P5) and one substrate point (N) (see Fig. 1). Point P1 is the first printed point and points P2, P3, P4, and P5 are located on the symmetry axis of the bulk samples.</h3></section>
+
+                    <!-- <section style="margin-left: 10%; margin-top: 2%;"> <h1 style="font-size: 25px;" > 2.2	Temperature evolutions at five important points</h1></section>
+                    <section style="margin-left: 10%; margin-top: 2%;"> <h3> 2.2	Temperature evolutions at five important points</h3></section>-->
+                    <main2>
+                      <main7>
+                          <img src="p2.png" style="width: 55%; justify-content: center; align-items: center; text-align: center; margin-left: 25%;"/> 
+                          <section style="margin-top: 2%; text-align: center;"> <h4> Fig. 1. Positions of the points (Clab P<sub>1</sub>, . . . , Clab P<sub>5</sub>, and Clab N) at which the temperature evolutions are examined. </h3></section>
+                        </main7>
+                    </main2>
+                    
+                    <section style="margin-left: 5%; margin-top: 2%;"> <h3>The process parameters and boundary conditions are set as:</h3></section>
+
+                    <section style="margin-top: 2%; text-align: center;"> <h4> Table 1. List of process parameters and boundary conditions set in the software. </h3></section>
+                  
+                    <table style="width:50%; justify-content: center; align-items: center; text-align: center; margin-left: 25%;">
+                      <tr>
+                        <td> <h2>Input parameters </h2></td>
+                        <td> <h2> Value</h2</td>
+                        <td> <h2>Unit</h2></td>
+                      </tr>
+                      <tr>
+                        <td>Laser power</td>
+                        <td id="liex">0</td>
+                        <td>kW</td>
+                      </tr>
+                      <tr>
+                        <td>Scanning speed</td>
+                        <td>350</td>
+                        <td>mm/min</td>
+                      </tr>
+                      <tr>
+                        <td>Ambient temperature</td>
+                        <td id="atx">0</td>
+                        <td>K</td>
+                      </tr>
+                      <tr>
+                        <td>Substrate temperature</td>
+                        <td id="sptx">0</td>
+                        <td>K</td>
+                      </tr>
+                      <tr>
+                        <td>Convection</td>
+                        <td>250</td>
+                        <td>W/m<sup>2</sup>K</td>
+                      </tr>
+                      <tr>
+                        <td>Radiation</td>
+                        <td>0.9</td>
+                        <td>-</td>
+                      </tr>
+                    </table>
+
+                    <section style="margin-left: 5%; margin-top: 2%;"> <h3>The material properties including the thermal conductivity and heat capacity are shown in Fig. 2.</h3></section>
+                  
+                    <main2>
+                      <main7>
+                          <img src="d.png" style="width: 100%; justify-content: center; align-items: center; text-align: center;"/> 
+                          <section style="margin-top: 2%; text-align: center;"> <h4> Fig. 2. Experimental measurements of thermal conductivity (left) and heat capacity (right) of the coating in the function of temperature. </h3></section>
+                        </main7>
+                    </main2>
+                    
+                    
+                    <section style="margin-left: 10%; margin-top: 2%;"> <h2> 2.1	Temperature fields and melting pool size</h2></section>
+                    <section style="margin-left: 10%; margin-top: 2%;"> <h3> 2.1	Temperature fields and melting pool size</h3></section>
+                  
+                    <main>
+                      <main7>
+                        <section style="margin-left: 40%; margin-top: 2%;"> <h3> Temperature fields </h3></section>
+                        <img src="a.png" style="width: 50%; justify-content: center; align-items: center; text-align: center; margin-left: 30%;"/> 
+                      </main7>
+                      <main7>
+                        <section style="margin-left: 15%; margin-top: 2%;"> <h3> Melting pool depths </h3></section>
+                        <img src="b.png" style="width: 50%; justify-content: center; align-items: center; text-align: center; margin-left: 5%;"/> 
+                      </main7>
+                    </main>
+
+                    <section style="margin-left: 10%; margin-top: 2%;"> <h2> 2.2	Temperature evolutions at five important points</h2></section>
+                  
+                    <section style="margin-left: 5%; margin-top: 2%;"> <h3>This section illustrates the temporospatial temperature field of the DED process with the input parameters listed in Sec. 2. As observed in Fig. 3, the temporospatial temperature field shows cyclic heating–cooling waves (also called temperature oscillations). These behaviors and their peak value play an essential role in determining the material microstructure.</h3></section>
+                  
+                      <main1>
+                        <main7>
+                          <div id="myPlot3" style="max-height: 300px;"></div>
+                          <section style="margin-left: 40%; margin-top: 2%;"> <h4 style="font-size: 15px;"> (a) Clad N </h4></section>
+                        </main7>
+                        <main7>
+                          <div id="myPlot4" style="max-height: 300px;"></div>
+                          <section style="margin-left: 40%; margin-top: 2%;"> <h4 style="font-size: 15px;" > (b) Clad P<sub>1</sub></h4></section>
+                        </main7>
+                      </main1>
+
+                      <main1>
+                        <main7>
+                          <div id="myPlot5" style="max-height: 300px;"></div>
+                          <section style="margin-left: 40%; margin-top: 2%;"> <h4 style="font-size: 15px;" > (c) Clad P<sub>2</sub></h4></section>
+                        </main7>
+
+                        <main7>
+                          <div id="myPlot6" style="max-height: 300px;"></div>
+                          <section style="margin-left: 40%; margin-top: 2%;"> <h4 style="font-size: 15px;" > (d) Clad P<sub>3</sub></h4></section>
+                        </main7>
+                      </main1>
+                  
+                      <main1>
+                        <main7>
+                          <div id="myPlot7" style="max-height: 300px;"></div>
+                          <section style="margin-left: 40%; margin-top: 2%;"> <h style="font-size: 15px;" > (e) Clad P<sub>4</sub></h4></section>
+                        </main7>
+                        <main7>
+                          <div id="myPlot8" style="max-height: 300px"></div>
+                          <section style="margin-left: 40%; margin-top: 2%;"> <h4 style="font-size: 15px;" > (f) Clad P<sub>5</sub></h4></section>
+                        </main7>
+                      </main1>
+
+
+                      <!-- <section style="margin-top: 2%; text-align: center;"> <h4> Table 2. List of process parameters and boundary conditions set in the software. </h3></section>
+                        <table style="width:50%; justify-content: center; align-items: center; text-align: center; margin-left: 25%;">
+                          <tr>
+                            <td> <h2> Point </h2></td>
+                            <td> <h2> Cooling Rate </h2</td>
+                            <td> <h2> Unit </h2></td>
+                          </tr>
+                          <tr>
+                            <td>P<sub>2</sub></td>
+                            <td id="p2">0</td>
+                            <td>K/mm</td>
+                          </tr>
+                          <tr>
+                            <td>P<sub>3</sub></td>
+                            <td id="p3">0</td>
+                            <td>K/mm</td>
+                          </tr>
+                          <tr>
+                            <td>P<sub>4</sub></td>
+                            <td id="p4">0</td>
+                            <td>K/mm</td>
+                          </tr>
+                          <tr>
+                            <td>P<sub>5</sub></td>
+                            <td id="p5">0</td>
+                            <td>K/mm</td>
+                          </tr>
+                        </table> -->
+
+                      <section style="margin-top: 2%; text-align: center;"> <h4> Fig. 3. The temporospatial temperature field evaluated at six selected points.</h3></section>                  
+                      <section style="margin-left: 10%; margin-top: 2%;"> <h2 style="font-size: 25px;" > 2.3. Melting pool sizes evolutions</h2></section>
+                      <section style="margin-left: 5%; margin-top: 2%;"> <h3>The melting pool plays an important role in determining the microstructures of the printed sample and its subsequent mechanical properties. It is defined as the liquid zone generated by the laser and is built by the melted powder flow induced by the laser energy and the fusion of the previously printed layers. The sizes of the melting pool are numerically identified as the area where the temperature is greater than the melting temperature, which is estimated as 1676.15 K for the M4 HSS material [1]. Fig. 4 shows the melting pool sizes including depth, width, and area of the DED process with the input parameters listed in Sec. 2.</h3></section>
+                      
+                      <main1>
+                        <main7>
+                          <div id="myPlot9" style="max-height: 300px;"></div>
+                        <main7>
+                          <div id="myPlot10" style="max-height: 300px;"></div>
+                        </main7>
+                        <main7>
+                            <div id="myPlot11" style="max-height: 300px;"></div>
+                          </main7>
+                      </main1>       
+                      <!-- <main1 style="padding-left: 20%; justify-content: center; align-items: center; text-align: center;">
+                          <div id="myPlot11" style= "justify-content: center; align-items: center; text-align: center;"></div>
+                      </main1> -->
+                      <section style="margin-top: 2%; text-align: center;"> <h4> Fig. 4. The melting pool sizes including its width, depth and area.</h3></section>
+                      <section style="margin-left: 10%; margin-top: 2%;"> <h1 style="font-size: 25px;" > 3. References</h1></section>
+                      <section style="margin-left: 5%; margin-top: 2%;"> <h3>[1] Quy Duc Pham, T., Vinh Hoang, T., Tuan Pham, Q., Phuc Huynh, T., Van Tran, X., El Fetni, S., Duchêne, L., Tran, H.S., & Habraken, A. (2021, April). Data-driven prediction of temperature evolution in metallic additive manufacturing process. In <i>24th International Conference on Material Forming.</i> PoPuPs, Liege, Belgium.</h3></section>
+                      <section style="margin-left: 5%; margin-top: 2%;"> <h3>[2] Pham, T. Q. D., Hoang, T. V., Van Tran, X., Pham, Q. T., Fetni, S., Duchêne, L., Tran, H. S & Habraken, A. M. (2022). Fast and accurate prediction of temperature evolutions in additive manufacturing process using deep learning. <i> Journal of Intelligent Manufacturing, </i> 1-19.</h3></section>
+                      <section style="margin-left: 5%; margin-top: 2%;"> <h3>[3] Pham, T. Q. D., Hoang, T. V., Tran, X. V., Fetni, S., Duchêne, L., Tran, H. S., & Habraken, A. M. (2022). Characterization, propagation, and sensitivity analysis of uncertainties in the directed energy deposition process using a deep learning-based surrogate model. <i>Probabilistic Engineering Mechanics, </i> 103297.</h3></section>
+                      <section style="margin-left: 5%; margin-top: 2%;"> <h3>[4] Pham, T. Q. D., Hoang, T. V., Tran, X. V., Fetni, S., Duchêne, L., Tran, H. S., & Habraken, A. M. (2022). A framework for robust optimization under uncertainty in the additive manufacturing process. <i> Additive Manufacturing, </i> submitted.</h3></section>
+
+                      <section style="margin-left: 10%; margin-top: 2%;"> <h1 style="font-size: 25px;" > 4.	Acknowledgment</h1></section>
+                      <section style="margin-left: 5%; margin-top: 2%;"> <h3> This work was funded by Vingroup and supported by Vingroup Innovation Foundation (VINIF) under project code VINIF.2020.DA15.</h3></section>
+                
+          <div class="row">
+						<div class="col-xs-8 col-sm-8 col-md-8 text-left">
+							<div class="receipt-right">
+								<h5 style="color: rgb(140, 140, 140)"
+									>Thank you!</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    
+    <script src="./config.js"></script>
+    <script src="script_report_v4.js"></script>
+	</body>
+</html>
+ 

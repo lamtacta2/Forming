@@ -1,0 +1,17 @@
+body {
+  margin-top: 40px;
+  font-size: 22px;
+}
+
+#ignore {
+  background-color: #eee;
+}
+
+#btn {
+  margin-top: 20px;
+}
+
+#content img {
+  max-width: 500px;
+}/*# sourceMappingURL=custom.css.map */
+
