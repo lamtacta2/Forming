@@ -10,7 +10,7 @@ Plotly.newPlot("myPlot2", demo, layout2);
 
 firebase
 .database()
-.ref("Forming")
+.ref("SLM")
 .on("value", function (snap) {
 
   (async() => {
@@ -34,9 +34,9 @@ firebase
   
             let k=2;
 
-            url1 = 'https://raw.githubusercontent.com/lamtacta2/SLM/main/Data/data' + value.toString() + ".csv";
-            url2 = 'https://raw.githubusercontent.com/lamtacta2/SLM/main/Data/data1' + value.toString() + ".csv";
-            url3 = 'https://raw.githubusercontent.com/lamtacta2/SLM/main/Data/data2' + value.toString() + ".csv";
+            url1 = 'https://raw.githubusercontent.com/lamtacta2/Forming/main/Data/data' + value.toString() + ".csv";
+            url2 = 'https://raw.githubusercontent.com/lamtacta2/Forming/main/Data/data1' + value.toString() + ".csv";
+            url3 = 'https://raw.githubusercontent.com/lamtacta2/Forming/main/Data/data2' + value.toString() + ".csv";
             
             let workbook1 = XLSX.read(await (await fetch(url1)).arrayBuffer());
             let workbook2 = XLSX.read(await (await fetch(url2)).arrayBuffer());

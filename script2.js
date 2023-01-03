@@ -2,11 +2,11 @@ var container = document.querySelector("#unity-container");
 var canvas = document.querySelector("#unity-canvas");
 
 var buildUrl = "Build";
-var loaderUrl = buildUrl + "/SLM.loader.js";
+var loaderUrl = buildUrl + "/Forming.loader.js";
 var config = {
-  dataUrl: buildUrl + "/SLM.data.unityweb",
-  frameworkUrl: buildUrl + "/SLM.framework.js.unityweb",
-  codeUrl: buildUrl + "/SLM.wasm.unityweb",
+  dataUrl: buildUrl + "/Forming.data.unityweb",
+  frameworkUrl: buildUrl + "/Forming.framework.js.unityweb",
+  codeUrl: buildUrl + "/Forming.wasm.unityweb",
   streamingAssetsUrl: "StreamingAssets",
   companyName: "DefaultCompany",
   productName: "i4C_DigTwin",
