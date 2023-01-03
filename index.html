@@ -3,177 +3,117 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" integrity="sha512-r22gChDnGvBylk90+2e/ycr3RVrDi8DIOkIGNhJlKfuyQM4tIRAI062MaV8sfjQKYVGjOBaZBOA87z+IhZE9DA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title> Forming </title>
-
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        font-size: 10px;
-        font-weight: 100;
-      }
-
-      main{
-        width: 100%;
-        height: 100%;
-      }
-
-      main3{
-      width: 100%;
-      height: 50%;
-      border-style: solid; border-width: thin;
-      }
-
-      main5{
-        width: 60%;
-        height: 100%;
-      }
-
-      main6{
-        width: 40%;
-      }
-
-      main7{
-        width: 50%;
-        height: 25%;
-      }
-
-      main8{
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      }
-
-    section h1 {
-      font-size: 30px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    section h2 {
-      font-size: 20px;
-      text-transform: uppercase;
-    }
-
-    section i{
-      font-size: 15px;
-    }
-
-    section h6 {
-      font-size: 15px;
-      text-transform: none;
-    }
-
-    section h3 {
-      font-size: 15px;
-      text-transform: uppercase;
-    }
-
-    section h4 {
-      font-size: 10px;
-      text-align: left;
-      margin-left: 10%;
-    }
-
-
-    logo{
-      width: 100%;
-      height: 100%;
-      display: flex;
-    }
-
-    img{
-      width: 10%;
-      height: 10%;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      margin: 10px;
-    }
-
-
-    div.solid {border-style: solid; border-width: thin;}
-
-</style>
+    <title>Unity WebGL Player | i4C_DigTwin</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
   </head>
-
   <body>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div id="unity-container" class="unity-desktop">
+      <canvas id="unity-canvas" width=960 height=600></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-warning"> </div>
+      <div id="unity-footer">
+        <div id="unity-webgl-logo"></div>
+        <div id="unity-fullscreen-button"></div>
+        <div id="unity-build-title">i4C_DigTwin</div>
+      </div>
+    </div>
+    <script>
+      var container = document.querySelector("#unity-container");
+      var canvas = document.querySelector("#unity-canvas");
+      var loadingBar = document.querySelector("#unity-loading-bar");
+      var progressBarFull = document.querySelector("#unity-progress-bar-full");
+      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      var warningBanner = document.querySelector("#unity-warning");
 
-    <logo>
-      <img src="logotdm.png" style="margin-left: 5%; height: 65px;"/>
-    <main8 style="margin-top: 10px;">
-      <section>
-        <h1>EDPOMP - Virtual Lab</h1>
-        <h2>ADDITIVE MANUFACTURING (WIRE ARC ADDITIVE MANUFACTURING - WAAM)</h2>
-      </section>
-    </main8>
-      <img src="logovin_v1.png" style="margin-left: 5%; margin-right: 5%; height: 65px;"/>
-    </logo>
-
-    <main>
-      
-      <main5>
-        <div1 id="unity-container" class="unity-desktop">
-          <canvas id="unity-canvas" width= 100% height= 80%></canvas>
-        </div1>
-      </main5>
-
-      <main6 style="float: right; max-height: 80%;">
-        <!-- <img src="p1.png" style=" justify-content: center; align-items: center; text-align: center; width: 90%; max-height: 200px; "> -->
-        <div class="solid" id="myPlot" style="height: 5%; max-height: 300px;"></div>
-        <div class="solid" id="myPlot1" style="height: 5%; max-height: 300px;"></div>
-        <div class="solid" id="myPlot2" style="height: 5%; max-height: 300px;"></div>
-      </main6>
-
-    </main>
-    
-  <iframe id="frame" style="width: 100%; border: 0; height: 0" src="report_v5.html"></iframe>
-  <iframe id="frame1" style="width: 100%; border: 0; height: 0" src="index_tutorial.html"></iframe>
-
-</main>
-  <script src="./config.js"></script>
-  <script src="./script2.js"></script>
-  <script src="./script_plot_v1.js"></script>
-  
-  <script> 
-
-    firebase
-    .database()
-    .ref("SLM")
-    .on("value", function(snap){if(snap.val().control == 2){location.reload();}})
-
-    firebase
-    .database()
-    .ref("SLM")
-    .update({print: 0, control: 0}) 
-    
-    firebase
-    .database()
-    .ref("SLM")
-    .on("value", function (snap) {
-
-      if (snap.val().print == 1){
-        firebase
-        .database()
-        .ref()
-        .update({print: 0}) 
-        
-        let wspFrame = document.getElementById('frame').contentWindow;
-        wspFrame.focus();
-        wspFrame.print();
+      // Shows a temporary message banner/ribbon for a few seconds, or
+      // a permanent error message on top of the canvas if type=='error'.
+      // If type=='warning', a yellow highlight color is used.
+      // Modify or remove this function to customize the visually presented
+      // way that non-critical warnings and error messages are presented to the
+      // user.
+      function unityShowBanner(msg, type) {
+        function updateBannerVisibility() {
+          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+        }
+        var div = document.createElement('div');
+        div.innerHTML = msg;
+        warningBanner.appendChild(div);
+        if (type == 'error') div.style = 'background: red; padding: 10px;';
+        else {
+          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+          setTimeout(function() {
+            warningBanner.removeChild(div);
+            updateBannerVisibility();
+          }, 5000);
+        }
+        updateBannerVisibility();
       }
-    })
-    
-  </script>
+
+      var buildUrl = "Build";
+      var loaderUrl = buildUrl + "/Forming.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/Forming.data.unityweb",
+        frameworkUrl: buildUrl + "/Forming.framework.js.unityweb",
+        codeUrl: buildUrl + "/Forming.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "i4C_DigTwin",
+        productVersion: "0.1",
+        showBanner: unityShowBanner,
+      };
+
+      // By default Unity keeps WebGL canvas render target size matched with
+      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
+      // Set this to false if you want to decouple this synchronization from
+      // happening inside the engine, and you would instead like to size up
+      // the canvas DOM size and WebGL render target sizes yourself.
+      // config.matchWebGLToCanvasSize = false;
+
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+        container.className = "unity-mobile";
+        canvas.className = "unity-mobile";
+
+        // To lower canvas resolution on mobile devices to gain some
+        // performance, uncomment the following line:
+        // config.devicePixelRatio = 1;
+
+        unityShowBanner('WebGL builds are not supported on mobile devices.');
+      } else {
+        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
+
+        canvas.style.width = "960px";
+        canvas.style.height = "600px";
+      }
+
+      loadingBar.style.display = "block";
+
+      var script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBarFull.style.width = 100 * progress + "%";
+        }).then((unityInstance) => {
+          loadingBar.style.display = "none";
+          fullscreenButton.onclick = () => {
+            unityInstance.SetFullscreen(1);
+          };
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    </script>
   </body>
 </html>

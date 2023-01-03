@@ -10,7 +10,7 @@ Plotly.newPlot("myPlot2", demo, layout2);
 
 firebase
 .database()
-.ref("SLM")
+.ref("Forming")
 .on("value", function (snap) {
 
   (async() => {
@@ -20,6 +20,10 @@ firebase
             let value = snap.val().data;  
 
             value = value.toFixed(2);
+
+            if(value >= 1){
+               value = 1;
+            }
 
             const data1 = [];
             const data2 = [];
