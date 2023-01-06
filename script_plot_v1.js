@@ -1,6 +1,6 @@
-var layout = {xaxis: {title: "time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}, title: "Clab 1850"};
-var layout1 = {xaxis: {title: "time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}, title: "Clab 1322"};
-var layout2 = {xaxis: {title: "time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}, title: "Clab 19299"};
+var layout = {xaxis: {title: "Time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}, title: " 1850"};
+var layout1 = {xaxis: {title: "Time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}, title: " 1322"};
+var layout2 = {xaxis: {title: "Time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}, title: " 19299"};
 
 var demo = [{x: 0, y: 0, mode:"lines"}];
 
@@ -18,12 +18,19 @@ firebase
         if (snap.val().control == 1){
 
             let value = snap.val().data;  
+            let value1 = value.toFixed(1)
 
             value = value.toFixed(2);
+
+            if(value - value1  == 0){
+               value = value1;
+            }
 
             if(value >= 1){
                value = 1;
             }
+            
+            console.log(value);
 
             const data1 = [];
             const data2 = [];

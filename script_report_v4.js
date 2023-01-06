@@ -23,13 +23,21 @@ firebase
     if (snap.val().control == 1){
       
       let value = snap.val().data;  
+      let value1 = value.toFixed(1)
+
       value = value.toFixed(2);
 
-      document.getElementById("value").innerHTML = value;
+      if(value - value1  == 0){
+         value = value1;
+      }
 
       if(value >= 1){
          value = 1;
       }
+      
+      console.log(value);
+
+      document.getElementById("value").innerHTML = value;
 
       const data1 = [];
       const data2 = [];

@@ -173,6 +173,19 @@
               wspFrame.focus();
               wspFrame.print();
             }
+
+            if (snap.val().tutorial == 1){
+        firebase
+        .database()
+        .ref("SLM")
+        .update({tutorial: 0}) 
+        
+        let wspFrame = document.getElementById('frame1').contentWindow;
+        wspFrame.open("index_tutorial.html", "", "width=900, height=600");
+        // wspFrame.focus();
+        // wspFrame.print();
+      }
+
           })
           
         </script>
