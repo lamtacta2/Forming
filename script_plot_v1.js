@@ -18,16 +18,14 @@ firebase
         if (snap.val().control == 1){
 
             let value = snap.val().data;  
-            let value1 = value.toFixed(1)
-
             value = value.toFixed(2);
+            let value1 = Math.round( value );
+            // if(value - value1  == 0){
+            //    value = value1;
+            // }
 
-            if(value - value1  == 0){
-               value = value1;
-            }
-
-            if(value >= 1){
-               value = 1;
+            if(value1 >= 100){
+               value1 = 100;
             }
             
             console.log(value);
@@ -37,24 +35,26 @@ firebase
             const data3 = [];
             const data4 = [];
   
-            let k=2;
+            let k=1;
 
-            url1 = 'https://raw.githubusercontent.com/lamtacta2/Forming/main/Data/data' + value.toString() + ".csv";
+            url1 = 'https://raw.githubusercontent.com/lamtacta2/Forming/main/Data/data' + value1.toString() + ".csv";
           
+            console.log(url1);
+
             let workbook1 = XLSX.read(await (await fetch(url1)).arrayBuffer());
 
 
            function data_update(k){
-            for(let i = 2; i < k; i++){
+            for(let i = 1; i < k; i++){
                 const locale1 = "A"+i;
                 const locale2 = "B"+i; 
                 const locale3 = "C"+i;
                 const locale4 = "D"+i; 
 
-                data4[i-2] = workbook1.Sheets.Sheet1[locale4].v.slice(1,workbook1.Sheets.Sheet1[locale2].v.length-1);
-                data1[i-2] = workbook1.Sheets.Sheet1[locale1].v;      
-                data2[i-2] = workbook1.Sheets.Sheet1[locale2].v;     
-                data3[i-2] = workbook1.Sheets.Sheet1[locale3].v;       
+                data4[i] = workbook1.Sheets.Sheet1[locale4].v.slice(1,workbook1.Sheets.Sheet1[locale4].v.length-1);
+                data1[i] = workbook1.Sheets.Sheet1[locale1].v;      
+                data2[i] = workbook1.Sheets.Sheet1[locale2].v;     
+                data3[i] = workbook1.Sheets.Sheet1[locale3].v;       
             }}
   
             // Define Data
@@ -64,13 +64,12 @@ firebase
 
            function update(){
 
-             if (k<420){
-                k = k+1;
-             if (k < 420){data_update(k);}
+             if (k<18071){
+                k = k+50;
+                data_update(k);
                 Plotly.newPlot("myPlot", data, layout);
                 Plotly.newPlot("myPlot1", datax1, layout1);
                 Plotly.newPlot("myPlot2", datax2, layout2); 
              requestAnimationFrame(update);
-
            }}
            requestAnimationFrame(update);}})(); }) 

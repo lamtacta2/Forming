@@ -2,16 +2,16 @@ var container = document.querySelector("#unity-container");
 var canvas = document.querySelector("#unity-canvas");
 
 var buildUrl = "Build";
-var loaderUrl = buildUrl + "/Forming.loader.js";
-var config = {
-  dataUrl: buildUrl + "/Forming.data.unityweb",
-  frameworkUrl: buildUrl + "/Forming.framework.js.unityweb",
-  codeUrl: buildUrl + "/Forming.wasm.unityweb",
-  streamingAssetsUrl: "StreamingAssets",
-  companyName: "DefaultCompany",
-  productName: "i4C_DigTwin",
-  productVersion: "0.1",
-};
+      var loaderUrl = buildUrl + "/Forming.loader.js";
+      var config = {
+        dataUrl: buildUrl + "/Forming.data.unityweb",
+        frameworkUrl: buildUrl + "/Forming.framework.js.unityweb",
+        codeUrl: buildUrl + "/Forming.wasm.unityweb",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "EDPOMP",
+        productName: "Forming",
+        productVersion: "0.1",
+      };
 
 if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
 
