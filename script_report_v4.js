@@ -51,12 +51,10 @@ firebase
       const locale2 = "B"+i; 
       const locale3 = "C"+i;
       const locale4 = "D"+i;
-      console.log()
       data1[i-1] = workbook1.Sheets.Sheet1[locale1].v;      
       data2[i-1] = workbook1.Sheets.Sheet1[locale2].v;     
       data3[i-1] = workbook1.Sheets.Sheet1[locale3].v;      
-      data4[i-1] = workbook1.Sheets.Sheet1[locale4].v.slice(1,workbook1.Sheets.Sheet1[locale4].v.length-1);
-       
+      data4[i-1] = Math.abs(workbook1.Sheets.Sheet1[locale4].v.slice(1,workbook1.Sheets.Sheet1[locale4].v.length-1));
     }
 
     // Define Data
@@ -64,9 +62,9 @@ firebase
     var datax1 = [{x: data2, y: data4, mode:"lines"}];
     var datax2 = [{x: data3, y: data4, mode:"lines"}];
     
-    var layout = {xaxis: {title: "X"}, yaxis: {title: "Displacement"}, title: ""};
-    var layout1 = {xaxis: {title: "Y"}, yaxis: {title: "Displacement"}, title: ""};
-    var layout2 = {xaxis: {title: "Z"}, yaxis: {title: "Displacement"}, title: ""};
+    var layout = {xaxis: {title: "X"}, yaxis: {title: "Displacement"}};
+    var layout1 = {xaxis: {title: "Y"}, yaxis: {title: "Displacement"}};
+    var layout2 = {xaxis: {title: "Z"}, yaxis: {title: "Displacement"}};
 
     Plotly.newPlot("myPlot3", data, layout);
     Plotly.newPlot("myPlot4", datax1, layout1);

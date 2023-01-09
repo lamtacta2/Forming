@@ -1,6 +1,6 @@
-var layout = {xaxis: {title: "X"}, yaxis: {title: "Displacement"}, title: ""};
-var layout1 = {xaxis: {title: "Y"}, yaxis: {title: "Displacement"}, title: ""};
-var layout2 = {xaxis: {title: "Z"}, yaxis: {title: "Displacement"}, title: ""};
+var layout = {xaxis: {title: "X"}, yaxis: {title: "Displacement"}, title: "Deformed shape in x- direction"};
+var layout1 = {xaxis: {title: "Y"}, yaxis: {title: "Displacement"}, title: "Deformed shape in y- direction"};
+var layout2 = {xaxis: {title: "Z"}, yaxis: {title: "Displacement"}, title: "Deformed shape in z- direction"};
 
 var demo = [{x: 0, y: 0, mode:"lines"}];
 
@@ -48,10 +48,10 @@ firebase
                 const locale3 = "C"+i;
                 const locale4 = "D"+i; 
 
-                data4[i] = workbook1.Sheets.Sheet1[locale4].v.slice(1,workbook1.Sheets.Sheet1[locale4].v.length-1);
-                data1[i] = workbook1.Sheets.Sheet1[locale1].v;      
-                data2[i] = workbook1.Sheets.Sheet1[locale2].v;     
-                data3[i] = workbook1.Sheets.Sheet1[locale3].v;       
+                data4[i] =  Math.abs(workbook1.Sheets.Sheet1[locale4].v.slice(1,workbook1.Sheets.Sheet1[locale4].v.length-1));
+                data1[i] =  workbook1.Sheets.Sheet1[locale1].v;      
+                data2[i] =  workbook1.Sheets.Sheet1[locale2].v;     
+                data3[i] =  workbook1.Sheets.Sheet1[locale3].v;       
             }}
   
             // Define Data
