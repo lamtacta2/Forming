@@ -1,6 +1,6 @@
-var layout = {xaxis: {title: "Time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}, title: " 1850"};
-var layout1 = {xaxis: {title: "Time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}, title: " 1322"};
-var layout2 = {xaxis: {title: "Time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}, title: " 19299"};
+var layout = {xaxis: {title: "X"}, yaxis: {title: "Displacement"}, title: ""};
+var layout1 = {xaxis: {title: "Y"}, yaxis: {title: "Displacement"}, title: ""};
+var layout2 = {xaxis: {title: "Z"}, yaxis: {title: "Displacement"}, title: ""};
 
 var demo = [{x: 0, y: 0, mode:"lines"}];
 
@@ -18,17 +18,14 @@ firebase
         if (snap.val().control == 1){
 
             let value = snap.val().data;  
-            value = value.toFixed(2);
-            let value1 = Math.round( value );
-            // if(value - value1  == 0){
-            //    value = value1;
-            // }
+            value = value * 100;
+            let value1 = Math.ceil(value);
 
             if(value1 >= 100){
                value1 = 100;
             }
             
-            console.log(value);
+            console.log(value1);
 
             const data1 = [];
             const data2 = [];
@@ -64,7 +61,7 @@ firebase
 
            function update(){
 
-             if (k<18071){
+             if (k<18011){
                 k = k+50;
                 data_update(k);
                 Plotly.newPlot("myPlot", data, layout);

@@ -23,40 +23,40 @@ firebase
     if (snap.val().control == 1){
       
       let value = snap.val().data;  
-      // let value1 = value.toFixed(1)
-
-
-      value = value.toFixed(2);
-
-      // if(value - value1  == 0){
-      //    value = value1;
-      // }
-
-      if(value >= 1){
-         value = 1.0;
-         value.toFixed(1);
-      }
 
       document.getElementById("value").innerHTML = value;
+
+      value = value * 100;
+      let value1 = Math.ceil(value);
+
+      if(value1 >= 100){
+         value1 = 100;
+      }
+      
+      console.log(value1);
 
       const data1 = [];
       const data2 = [];
       const data3 = [];
       const data4 = [];
 
-      url1 = 'https://raw.githubusercontent.com/lamtacta2/Forming/main/Data/data' + value.toString() + ".csv";
+      url1 = 'https://raw.githubusercontent.com/lamtacta2/Forming/main/Data/data' + value1.toString() + ".csv";
+    
+      console.log(url1);
+
       let workbook1 = XLSX.read(await (await fetch(url1)).arrayBuffer());
-     
-    for(let i = 2; i < 18071; i++){
+    
+    for(let i = 1; i < 18011; i++){
       const locale1 = "A"+i;
       const locale2 = "B"+i; 
       const locale3 = "C"+i;
-      const locale4 = "D"+i; 
-
-      data4[i-2] = workbook1.Sheets.Sheet1[locale4].v.slice(1,workbook1.Sheets.Sheet1[locale4].v.length-1);
-      data1[i-2] = workbook1.Sheets.Sheet1[locale1].v;      
-      data2[i-2] = workbook1.Sheets.Sheet1[locale2].v;     
-      data3[i-2] = workbook1.Sheets.Sheet1[locale3].v;       
+      const locale4 = "D"+i;
+      console.log()
+      data1[i-1] = workbook1.Sheets.Sheet1[locale1].v;      
+      data2[i-1] = workbook1.Sheets.Sheet1[locale2].v;     
+      data3[i-1] = workbook1.Sheets.Sheet1[locale3].v;      
+      data4[i-1] = workbook1.Sheets.Sheet1[locale4].v.slice(1,workbook1.Sheets.Sheet1[locale4].v.length-1);
+       
     }
 
     // Define Data
@@ -64,9 +64,9 @@ firebase
     var datax1 = [{x: data2, y: data4, mode:"lines"}];
     var datax2 = [{x: data3, y: data4, mode:"lines"}];
     
-    layout = {xaxis: {title: "time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}};
-    layout1 = {xaxis: {title: "time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}};
-    layout2 = {xaxis: {title: "time (s)"}, yaxis: {title: "Temperature (<sup>o</sup>C)"}};
+    var layout = {xaxis: {title: "X"}, yaxis: {title: "Displacement"}, title: ""};
+    var layout1 = {xaxis: {title: "Y"}, yaxis: {title: "Displacement"}, title: ""};
+    var layout2 = {xaxis: {title: "Z"}, yaxis: {title: "Displacement"}, title: ""};
 
     Plotly.newPlot("myPlot3", data, layout);
     Plotly.newPlot("myPlot4", datax1, layout1);
