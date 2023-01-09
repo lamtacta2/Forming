@@ -62,9 +62,9 @@ firebase
     var datax1 = [{x: data2, y: data4, mode:"lines"}];
     var datax2 = [{x: data3, y: data4, mode:"lines"}];
     
-    var layout = {xaxis: {title: "X"}, yaxis: {title: "Displacement"}};
-    var layout1 = {xaxis: {title: "Y"}, yaxis: {title: "Displacement"}};
-    var layout2 = {xaxis: {title: "Z"}, yaxis: {title: "Displacement"}};
+    var layout = {xaxis: {title: "X (mm)"}, yaxis: {title: "Displacement"}};
+    var layout1 = {xaxis: {title: "Y (mm)"}, yaxis: {title: "Displacement"}};
+    var layout2 = {xaxis: {title: "Z (mm)"}, yaxis: {title: "Displacement"}};
 
     Plotly.newPlot("myPlot3", data, layout);
     Plotly.newPlot("myPlot4", datax1, layout1);

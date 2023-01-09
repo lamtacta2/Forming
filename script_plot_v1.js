@@ -1,6 +1,6 @@
-var layout = {xaxis: {title: "X"}, yaxis: {title: "Displacement"}, title: "Deformed shape in x- direction"};
-var layout1 = {xaxis: {title: "Y"}, yaxis: {title: "Displacement"}, title: "Deformed shape in y- direction"};
-var layout2 = {xaxis: {title: "Z"}, yaxis: {title: "Displacement"}, title: "Deformed shape in z- direction"};
+var layout = {xaxis: {title: "X (mm)"}, yaxis: {title: "Displacement"}, title: "Deformed shape in x- direction"};
+var layout1 = {xaxis: {title: "Y (mm)"}, yaxis: {title: "Displacement"}, title: "Deformed shape in y- direction"};
+var layout2 = {xaxis: {title: "Z (mm)"}, yaxis: {title: "Displacement"}, title: "Deformed shape in z- direction"};
 
 var demo = [{x: 0, y: 0, mode:"lines"}];
 
