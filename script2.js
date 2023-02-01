@@ -32,7 +32,6 @@ script.src = loaderUrl;
 script.onload = () => {
   createUnityInstance(canvas, config, (progress) => {
   }).then((unityInstance) => {
-
   }).catch((message) => {
     alert(message);
   });

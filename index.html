@@ -148,15 +148,22 @@
         
         <script> 
       
-          firebase
-          .database()
-          .ref("SLM")
-          .on("value", function(snap){if(snap.val().control == 2){location.reload();}})
+    firebase
+    .database()
+    .ref("SLM")
+    .on("value", function(snap){if(snap.val().control == 2){
+      // location.reload();
+      var number = snap.val().section + 1;
+      firebase
+      .database()
+      .ref("SLM")
+      .update({section: number, control: 0}) 
+    }})
       
           firebase
           .database()
           .ref("SLM")
-          .update({print: 0, control: 0}) 
+          .update({print: 0, control: 0, section: 1}) 
           
           firebase
           .database()
