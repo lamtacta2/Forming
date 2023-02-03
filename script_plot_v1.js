@@ -12,7 +12,6 @@ firebase
 .database()
 .ref("SLM")
 .on("value", function (snap) {
-
   (async() => {
 
         if (snap.val().control == 1){
@@ -24,8 +23,6 @@ firebase
             if(value1 >= 100){
                value1 = 100;
             }
-            
-            console.log(value1);
 
             const data1 = [];
             const data2 = [];
@@ -34,12 +31,16 @@ firebase
   
             let k=1;
 
+            k = snap.val().k;
+
+            let s = 1;
+            let check = 1;
+
             url1 = 'https://raw.githubusercontent.com/lamtacta2/Forming/main/Data/data' + value1.toString() + ".csv";
           
             console.log(url1);
 
             let workbook1 = XLSX.read(await (await fetch(url1)).arrayBuffer());
-
 
            function data_update(k){
             for(let i = 1; i < k; i++){
@@ -54,19 +55,47 @@ firebase
                 data3[i] =  workbook1.Sheets.Sheet1[locale3].v;       
             }}
   
-            // Define Data
             var data = [{x: data1, y: data4, mode:"lines"}];
             var datax1 = [{x: data2, y: data4, mode:"lines"}];
             var datax2 = [{x: data3, y: data4, mode:"lines"}];
 
            function update(){
-
              if (k<18011){
-                k = k+50;
-                data_update(k);
-                Plotly.newPlot("myPlot", data, layout);
-                Plotly.newPlot("myPlot1", datax1, layout1);
-                Plotly.newPlot("myPlot2", datax2, layout2); 
-             requestAnimationFrame(update);
+                s = s + 1;
+                if(s%10==1){
+                  firebase
+                  .database()
+                  .ref("SLM")
+                  .on("value", function (snap) {
+                     check = snap.val().control;
+                     if(snap.val().k == 18010){
+                        k = 18010;
+                     }
+                  })
+                }
+
+                if(check == 5){
+                  firebase
+                  .database()
+                  .ref("SLM")
+                  .update({k: k}) 
+                }
+
+                if(check == 1){
+                  k = k+50;
+                  if(k>18010){
+                     k = 18010;
+                  }
+                  data_update(k);
+                  Plotly.newPlot("myPlot", data, layout);
+                  Plotly.newPlot("myPlot1", datax1, layout1);
+                  Plotly.newPlot("myPlot2", datax2, layout2); 
+                }
+                 
+                if(check != 0){
+                  requestAnimationFrame(update);
+                }
+
            }}
-           requestAnimationFrame(update);}})(); }) 
+            requestAnimationFrame(update);
+         }})(); }) 

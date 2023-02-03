@@ -154,34 +154,43 @@
     .on("value", function(snap){if(snap.val().control == 2){
       // location.reload();
       var number = snap.val().section + 1;
+
+      var layout = {xaxis: {title: "X (mm)"}, yaxis: {title: "Displacement"}, title: "Deformed shape in x- direction"};
+      var layout1 = {xaxis: {title: "Y (mm)"}, yaxis: {title: "Displacement"}, title: "Deformed shape in y- direction"};
+      var layout2 = {xaxis: {title: "Z (mm)"}, yaxis: {title: "Displacement"}, title: "Deformed shape in z- direction"};
+      var demo = [{x: 0, y: 0, mode:"lines"}];
+      Plotly.newPlot("myPlot", demo, layout);
+      Plotly.newPlot("myPlot1", demo, layout1);  
+      Plotly.newPlot("myPlot2", demo, layout2); 
+      
       firebase
       .database()
       .ref("SLM")
-      .update({section: number, control: 0}) 
+      .update({section: number, control: 0, k: 1}) 
     }})
       
-          firebase
-          .database()
-          .ref("SLM")
-          .update({print: 0, control: 0, section: 1}) 
+    firebase
+    .database()
+    .ref("SLM")
+    .update({print: 0, section: 1, k: 1}) 
           
-          firebase
-          .database()
-          .ref("SLM")
-          .on("value", function (snap) {
-      
-            if (snap.val().print == 1){
-              firebase
-              .database()
-              .ref("SLM")
-              .update({print: 0}) 
-              
-              let wspFrame = document.getElementById('frame').contentWindow;
-              wspFrame.focus();
-              wspFrame.print();
-            }
+    firebase
+    .database()
+    .ref("SLM")
+    .on("value", function (snap) {
 
-            if (snap.val().tutorial == 1){
+    if (snap.val().print == 1){
+      firebase
+      .database()
+      .ref("SLM")
+      .update({print: 0, k: 18010}) 
+      
+      let wspFrame = document.getElementById('frame').contentWindow;
+      wspFrame.focus();
+      wspFrame.print();
+    }
+
+        if (snap.val().tutorial == 1){
         firebase
         .database()
         .ref("SLM")
