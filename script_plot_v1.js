@@ -30,16 +30,12 @@ firebase
             const data4 = [];
   
             let k=1;
-
             k = snap.val().k;
-
             let s = 1;
             let check = 1;
 
             url1 = 'https://raw.githubusercontent.com/lamtacta2/Forming/main/Data/data' + value1.toString() + ".csv";
           
-            console.log(url1);
-
             let workbook1 = XLSX.read(await (await fetch(url1)).arrayBuffer());
 
            function data_update(k){
@@ -91,7 +87,6 @@ firebase
                   Plotly.newPlot("myPlot1", datax1, layout1);
                   Plotly.newPlot("myPlot2", datax2, layout2); 
                 }
-                 
                 if(check != 0){
                   requestAnimationFrame(update);
                 }
