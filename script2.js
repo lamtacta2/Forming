@@ -24,7 +24,7 @@ if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
   unityShowBanner('WebGL builds are not supported on mobile devices.');
 } else {
   canvas.style.width = "60%";
-  canvas.style.height = "90%";
+  // canvas.style.height = "90%";
 }
 
 var script = document.createElement("script");
