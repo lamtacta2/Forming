@@ -78,7 +78,7 @@ firebase
                 }
 
                 if(check == 1){
-                  k = k+50;
+                  k = k+1;
                   if(k>18010){
                      k = 18010;
                   }
