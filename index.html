@@ -84,7 +84,6 @@
             margin-left: 10%;
           }
       
-      
           logo{
             width: 100%;
             height: 100%;
@@ -144,9 +143,9 @@
       </main>
         <script src="./config.js"></script>
         <script src="./script2.js"></script>
-        <script src="./script_plot_v2.js"></script>
+        <script src="./script_plot_v1.js"></script>
         
-        <script> 
+    <script> 
       
     firebase
     .database()
@@ -154,7 +153,6 @@
     .on("value", function(snap){if(snap.val().control == 2){
       // location.reload();
       var number = snap.val().section + 1;
-
       var layout = {xaxis: {title: "X (mm)"}, yaxis: {title: "Displacement"}, title: "Deformed shape in x- direction"};
       var layout1 = {xaxis: {title: "Y (mm)"}, yaxis: {title: "Displacement"}, title: "Deformed shape in y- direction"};
       var layout2 = {xaxis: {title: "Z (mm)"}, yaxis: {title: "Displacement"}, title: "Deformed shape in z- direction"};
@@ -178,27 +176,25 @@
     .database()
     .ref("SLM")
     .on("value", function (snap) {
-
-    if (snap.val().print == 1){
-      firebase
-      .database()
-      .ref("SLM")
-      .update({print: 0, k: 18010}) 
-      let wspFrame = document.getElementById('frame').contentWindow;
-      wspFrame.focus();
-      wspFrame.print();
-    }
-
-        if (snap.val().tutorial == 1){
+      if (snap.val().print == 1){
         firebase
         .database()
         .ref("SLM")
-        .update({tutorial: 0}) 
-        let wspFrame = document.getElementById('frame1').contentWindow;
-        wspFrame.open("index_tutorial.html", "", "width=900, height=600");
-      }
+        .update({print: 0, k: 18010}) 
+        let wspFrame = document.getElementById('frame').contentWindow;
+        wspFrame.focus();
+        wspFrame.print();
+    }
 
-          })
+    if (snap.val().tutorial == 1){
+    firebase
+    .database()
+    .ref("SLM")
+    .update({tutorial: 0}) 
+    let wspFrame = document.getElementById('frame1').contentWindow;
+    wspFrame.open("index_tutorial.html", "", "width=900, height=600");
+    }
+})
           
 </script>
 </body>
